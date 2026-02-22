@@ -30,15 +30,25 @@ class Distance:
     def __truediv__(self, div: float) -> Distance:
         return Distance(round((self.km / div), 2))
 
-    def __lt__(self, dist: float) -> bool:
-        if self.km < dist:
-            return True
-        return False
+    def __lt__(self, dist: int | float | Distance) -> bool:
+        if isinstance(dist, Distance):
+            if self.km < dist.km:
+                return True
+            return False
+        else:
+            if self.km < dist:
+                return True
+            return False
 
-    def __gt__(self, dist: float) -> bool:
-        if self.km > dist:
-            return True
-        return False
+    def __gt__(self, dist: int | float | Distance) -> bool:
+        if isinstance(dist, Distance):
+            if self.km > dist.km:
+                return True
+            return False
+        else:
+            if self.km > dist:
+                return True
+            return False
 
     def __eq__(self, dist: float) -> bool:
         if self.km == dist:
